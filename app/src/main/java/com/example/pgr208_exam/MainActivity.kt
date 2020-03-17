@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity(),FeatureCollectionListener {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }
 
-
     }
 
     private fun updateFeatures(features: ArrayList<Feature>) {

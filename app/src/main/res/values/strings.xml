@@ -2,4 +2,5 @@
     <string name="app_name">PGR208-Exam</string>
     <string name="feature_error">Error finding feature</string>
     <string name="connectivity_error">Cant connect to internet</string>
+    <string name="search">Search</string>
 </resources>

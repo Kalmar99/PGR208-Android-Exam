@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#10080808"
+    android:background="@color/gray"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/search"
+        android:textColorHint="@color/black"
+        android:textSize="25sp"
+        android:background="@drawable/search_bg"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="15dp"
+        android:paddingLeft="10dp"
+        android:layout_margin="10dp"
+
+        />
+
+
 
     <ProgressBar
         android:visibility="invisible"
