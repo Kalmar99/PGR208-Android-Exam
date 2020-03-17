@@ -12,6 +12,8 @@ class GetFeatureCollection(var listener: FeatureCollectionListener?) : AsyncTask
 
     override fun doInBackground(vararg params: String?): FeatureCollection {
 
+        publishProgress(0)
+
         try {
 
             var response = webRequest(params.get(0)!!)
@@ -25,8 +27,17 @@ class GetFeatureCollection(var listener: FeatureCollectionListener?) : AsyncTask
         return FeatureCollection()
     }
 
+    override fun onProgressUpdate(vararg values: Int?) {
+        super.onProgressUpdate(*values)
+
+        listener?.showProgress(true)
+
+    }
+
     override fun onPostExecute(result: FeatureCollection) {
         super.onPostExecute(result)
+
+        listener?.showProgress(false)
 
         if(result != null) {
             if(result.getFeatures().isEmpty()){

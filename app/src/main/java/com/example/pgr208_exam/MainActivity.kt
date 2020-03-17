@@ -2,6 +2,7 @@ package com.example.pgr208_exam
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
@@ -23,8 +24,6 @@ class MainActivity : AppCompatActivity(),FeatureCollectionListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Implement network avaible method
-
         adapter = FeatureAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter;
@@ -40,17 +39,35 @@ class MainActivity : AppCompatActivity(),FeatureCollectionListener {
 
     private fun updateFeatures(features: ArrayList<Feature>) {
 
+        if(isFinishing) {
+            return;
+        }
+
         adapter.list = features // update list
         adapter.notifyDataSetChanged() // Notify the adapter that data has been updated
     }
 
     override fun onFeaturesSuccess(collection: FeatureCollection) {
+
+        if(isFinishing) {
+            return;
+        }
+
         //Sending only the features list as an arrayList
         updateFeatures(ArrayList(collection.getFeatures()))
     }
 
     override fun onFeaturesError() {
         Toast.makeText(this, getString(R.string.feature_error), Toast.LENGTH_LONG).show()
+    }
+
+    override fun showProgress(show: Boolean) {
+
+        if (isFinishing ) {
+            return;
+        }
+
+        progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
 }
