@@ -8,7 +8,7 @@ import okhttp3.Request
 import java.lang.Exception
 
 
-class GetFeatureCollection() : AsyncTask<String, Int, FeatureCollection>() {
+class GetFeatureCollection(var listener: FeatureCollectionListener?) : AsyncTask<String, Int, FeatureCollection>() {
 
     override fun doInBackground(vararg params: String?): FeatureCollection {
 
@@ -23,6 +23,24 @@ class GetFeatureCollection() : AsyncTask<String, Int, FeatureCollection>() {
         }
 
         return FeatureCollection()
+    }
+
+    override fun onPostExecute(result: FeatureCollection) {
+        super.onPostExecute(result)
+
+        if(result != null) {
+            if(result.getFeatures().isEmpty()){
+                listener?.onFeaturesError()
+            }
+            else {
+                listener?.onFeaturesSuccess(result)
+            }
+        } else {
+            listener?.onFeaturesError()
+
+        }
+
+
     }
 
 
@@ -42,7 +60,7 @@ class GetFeatureCollection() : AsyncTask<String, Int, FeatureCollection>() {
     private fun parseJson(json:String) : FeatureCollection {
         var gson = Gson()
 
-        val collection = gson.fromJson(json,FeatureCollection::class.java);
+        val collection = gson.fromJson(json,FeatureCollection::class.java)
 
         return collection
     }
