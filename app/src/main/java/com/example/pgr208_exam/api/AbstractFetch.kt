@@ -1,15 +1,12 @@
 package com.example.pgr208_exam.api
 
 import android.os.AsyncTask
-import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
-import com.example.pgr208_exam.gsontypes.single.Feature
-import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.lang.Exception
 
 
-abstract class AbstractFetch<T>(var listener: FeatureCollectionListener<T>?) : AsyncTask<String, Int, T>() {
+abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<String, Int, T>() {
 
 
     override fun doInBackground(vararg params: String?): T {

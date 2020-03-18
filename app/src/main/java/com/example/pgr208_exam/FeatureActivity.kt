@@ -1,20 +1,18 @@
 package com.example.pgr208_exam
 
 import android.os.Bundle
-import android.text.Html
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
-import com.example.pgr208_exam.api.FeatureCollectionListener
-import com.example.pgr208_exam.api.GetFeatureById
+import com.example.pgr208_exam.api.AsyncListener
+import com.example.pgr208_exam.api.FetchFeature
 import com.example.pgr208_exam.gsontypes.single.Feature
 import com.example.pgr208_exam.utils.Utils
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_feature.*
 
-class FeatureActivity : AppCompatActivity(), FeatureCollectionListener<Feature> {
+class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
     companion object{
         const val FEATURE_ID = ""
@@ -37,7 +35,7 @@ class FeatureActivity : AppCompatActivity(), FeatureCollectionListener<Feature> 
         var url = endpoint + featureId + "\n"
 
         if(Utils.isNetworkAvailable(this)) {
-            GetFeatureById(this).execute(url);
+            FetchFeature(this).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }

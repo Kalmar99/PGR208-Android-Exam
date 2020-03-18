@@ -2,7 +2,7 @@ package com.example.pgr208_exam.api
 
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.google.gson.Gson
-class GetFeatureCollection(listener: FeatureCollectionListener<FeatureCollection>?) : AbstractFetch<FeatureCollection>(listener) {
+class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?) : AbstractFetch<FeatureCollection>(listener) {
 
     override fun onProgressUpdate(vararg values: Int?) {
         super.onProgressUpdate(*values)

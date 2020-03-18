@@ -7,15 +7,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
-import com.example.pgr208_exam.api.FeatureCollectionListener
-import com.example.pgr208_exam.api.GetFeatureCollection
+import com.example.pgr208_exam.api.AsyncListener
+import com.example.pgr208_exam.api.FetchFeatureCollection
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),FeatureCollectionListener<FeatureCollection>, View.OnClickListener {
+class MainActivity : AppCompatActivity(),AsyncListener<FeatureCollection>, View.OnClickListener {
 
     var url = "https://www.noforeignland.com/home/api/v1/places/"
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(),FeatureCollectionListener<FeatureCollec
         adapter.onClickListener = this
 
         if(Utils.isNetworkAvailable(this)) {
-            GetFeatureCollection(this).execute(url);
+            FetchFeatureCollection(this).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }
