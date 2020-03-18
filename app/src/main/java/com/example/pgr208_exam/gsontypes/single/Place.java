@@ -12,7 +12,7 @@ public class Place {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Long id;
     @SerializedName("type")
     @Expose
     private String type;
@@ -36,7 +36,7 @@ public class Place {
     private Meta meta;
     @SerializedName("blogCount")
     @Expose
-    private Integer blogCount;
+    private Long blogCount;
     @SerializedName("externalLink1")
     @Expose
     private String externalLink1;
@@ -54,16 +54,16 @@ public class Place {
     private Double dieselPrice;
     @SerializedName("dieselPriceUpdatedMs")
     @Expose
-    private Integer dieselPriceUpdatedMs;
+    private Long dieselPriceUpdatedMs;
     @SerializedName("gasolinePrice")
     @Expose
-    private Integer gasolinePrice;
+    private Long gasolinePrice;
     @SerializedName("gasolinePriceUpdatedMs")
     @Expose
-    private Integer gasolinePriceUpdatedMs;
+    private Long gasolinePriceUpdatedMs;
     @SerializedName("maxLiftWeightTonnes")
     @Expose
-    private Integer maxLiftWeightTonnes;
+    private Long maxLiftWeightTonnes;
     @SerializedName("allowsExternalContractors")
     @Expose
     private Boolean allowsExternalContractors;
@@ -87,22 +87,22 @@ public class Place {
     private String protectionFrom;
     @SerializedName("addedMs")
     @Expose
-    private Integer addedMs;
+    private Long addedMs;
     @SerializedName("addedBy")
     @Expose
     private String addedBy;
     @SerializedName("addedById")
     @Expose
-    private Integer addedById;
+    private Long addedById;
     @SerializedName("updatedMs")
     @Expose
-    private Integer updatedMs;
+    private Long updatedMs;
     @SerializedName("updatedBy")
     @Expose
     private String updatedBy;
     @SerializedName("updatedById")
     @Expose
-    private Integer updatedById;
+    private Long updatedById;
     @SerializedName("col")
     @Expose
     private String col;
@@ -114,7 +114,7 @@ public class Place {
     private String mapboxIcon;
     @SerializedName("stars")
     @Expose
-    private Integer stars;
+    private Long stars;
     @SerializedName("banner")
     @Expose
     private String banner;
@@ -125,11 +125,11 @@ public class Place {
     @Expose
     private List<Object> reviews = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -189,11 +189,11 @@ public class Place {
         this.meta = meta;
     }
 
-    public Integer getBlogCount() {
+    public Long getBlogCount() {
         return blogCount;
     }
 
-    public void setBlogCount(Integer blogCount) {
+    public void setBlogCount(Long blogCount) {
         this.blogCount = blogCount;
     }
 
@@ -237,35 +237,35 @@ public class Place {
         this.dieselPrice = dieselPrice;
     }
 
-    public Integer getDieselPriceUpdatedMs() {
+    public Long getDieselPriceUpdatedMs() {
         return dieselPriceUpdatedMs;
     }
 
-    public void setDieselPriceUpdatedMs(Integer dieselPriceUpdatedMs) {
+    public void setDieselPriceUpdatedMs(Long dieselPriceUpdatedMs) {
         this.dieselPriceUpdatedMs = dieselPriceUpdatedMs;
     }
 
-    public Integer getGasolinePrice() {
+    public Long getGasolinePrice() {
         return gasolinePrice;
     }
 
-    public void setGasolinePrice(Integer gasolinePrice) {
+    public void setGasolinePrice(Long gasolinePrice) {
         this.gasolinePrice = gasolinePrice;
     }
 
-    public Integer getGasolinePriceUpdatedMs() {
+    public Long getGasolinePriceUpdatedMs() {
         return gasolinePriceUpdatedMs;
     }
 
-    public void setGasolinePriceUpdatedMs(Integer gasolinePriceUpdatedMs) {
+    public void setGasolinePriceUpdatedMs(Long gasolinePriceUpdatedMs) {
         this.gasolinePriceUpdatedMs = gasolinePriceUpdatedMs;
     }
 
-    public Integer getMaxLiftWeightTonnes() {
+    public Long getMaxLiftWeightTonnes() {
         return maxLiftWeightTonnes;
     }
 
-    public void setMaxLiftWeightTonnes(Integer maxLiftWeightTonnes) {
+    public void setMaxLiftWeightTonnes(Long maxLiftWeightTonnes) {
         this.maxLiftWeightTonnes = maxLiftWeightTonnes;
     }
 
@@ -325,11 +325,11 @@ public class Place {
         this.protectionFrom = protectionFrom;
     }
 
-    public Integer getAddedMs() {
+    public Long getAddedMs() {
         return addedMs;
     }
 
-    public void setAddedMs(Integer addedMs) {
+    public void setAddedMs(Long addedMs) {
         this.addedMs = addedMs;
     }
 
@@ -341,19 +341,19 @@ public class Place {
         this.addedBy = addedBy;
     }
 
-    public Integer getAddedById() {
+    public Long getAddedById() {
         return addedById;
     }
 
-    public void setAddedById(Integer addedById) {
+    public void setAddedById(Long addedById) {
         this.addedById = addedById;
     }
 
-    public Integer getUpdatedMs() {
+    public Long getUpdatedMs() {
         return updatedMs;
     }
 
-    public void setUpdatedMs(Integer updatedMs) {
+    public void setUpdatedMs(Long updatedMs) {
         this.updatedMs = updatedMs;
     }
 
@@ -365,11 +365,11 @@ public class Place {
         this.updatedBy = updatedBy;
     }
 
-    public Integer getUpdatedById() {
+    public Long getUpdatedById() {
         return updatedById;
     }
 
-    public void setUpdatedById(Integer updatedById) {
+    public void setUpdatedById(Long updatedById) {
         this.updatedById = updatedById;
     }
 
@@ -397,11 +397,11 @@ public class Place {
         this.mapboxIcon = mapboxIcon;
     }
 
-    public Integer getStars() {
+    public Long getStars() {
         return stars;
     }
 
-    public void setStars(Integer stars) {
+    public void setStars(Long stars) {
         this.stars = stars;
     }
 

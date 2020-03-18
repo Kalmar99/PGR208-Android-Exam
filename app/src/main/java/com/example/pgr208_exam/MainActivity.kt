@@ -15,7 +15,7 @@ import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),FeatureCollectionListener, View.OnClickListener {
+class MainActivity : AppCompatActivity(),FeatureCollectionListener<FeatureCollection>, View.OnClickListener {
 
     var url = "https://www.noforeignland.com/home/api/v1/places/"
 

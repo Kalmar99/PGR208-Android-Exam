@@ -1,13 +1,39 @@
 package com.example.pgr208_exam.api
 
 import android.os.AsyncTask
-import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
+
 import com.example.pgr208_exam.gsontypes.single.Feature
+import com.google.gson.Gson
 
-class GetFeatureById(var listener: FeatureCollectionListener?) : AsyncTask<String, Int, Feature>() {
+class GetFeatureById(listener: FeatureCollectionListener<Feature>?) : AbstractFetch<Feature>(listener) {
 
-    override fun doInBackground(vararg params: String?): Feature {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    override fun onPostExecute(result: Feature) {
+        super.onPostExecute(result)
+
+        listener?.showProgress(false)
+
+        if (result != null) {
+            if (result.place === null) {
+                listener?.onFeaturesError()
+            } else {
+                listener?.onFeaturesSuccess(result)
+            }
+        } else {
+            listener?.onFeaturesError()
+
+        }
+
+
+    }
+
+    override fun parseJson(json:String) : Feature {
+        var gson = Gson()
+
+        val feature = gson.fromJson(json,
+            Feature::class.java)
+
+        return feature
     }
 
 }
