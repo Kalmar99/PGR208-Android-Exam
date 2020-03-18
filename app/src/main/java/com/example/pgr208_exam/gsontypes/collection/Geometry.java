@@ -1,5 +1,5 @@
 
-package com.example.pgr208_exam.gsontypes;
+package com.example.pgr208_exam.gsontypes.collection;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -8,14 +8,14 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class FeatureCollection {
+public class Geometry {
 
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("features")
+    @SerializedName("coordinates")
     @Expose
-    private List<Feature> features = null;
+    private List<Double> coordinates = null;
 
     public String getType() {
         return type;
@@ -25,22 +25,22 @@ public class FeatureCollection {
         this.type = type;
     }
 
-    public List<Feature> getFeatures() {
-        return features;
+    public List<Double> getCoordinates() {
+        return coordinates;
     }
 
-    public void setFeatures(List<Feature> features) {
-        this.features = features;
+    public void setCoordinates(List<Double> coordinates) {
+        this.coordinates = coordinates;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("type", type).append("features", features).toString();
+        return new ToStringBuilder(this).append("type", type).append("coordinates", coordinates).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(type).append(features).toHashCode();
+        return new HashCodeBuilder().append(type).append(coordinates).toHashCode();
     }
 
     @Override
@@ -48,11 +48,11 @@ public class FeatureCollection {
         if (other == this) {
             return true;
         }
-        if ((other instanceof FeatureCollection) == false) {
+        if ((other instanceof Geometry) == false) {
             return false;
         }
-        FeatureCollection rhs = ((FeatureCollection) other);
-        return new EqualsBuilder().append(type, rhs.type).append(features, rhs.features).isEquals();
+        Geometry rhs = ((Geometry) other);
+        return new EqualsBuilder().append(type, rhs.type).append(coordinates, rhs.coordinates).isEquals();
     }
 
 }

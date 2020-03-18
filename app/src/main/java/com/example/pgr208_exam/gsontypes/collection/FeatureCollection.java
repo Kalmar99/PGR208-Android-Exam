@@ -1,5 +1,5 @@
 
-package com.example.pgr208_exam.gsontypes;
+package com.example.pgr208_exam.gsontypes.collection;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -8,14 +8,14 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Geometry {
+public class FeatureCollection {
 
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("coordinates")
+    @SerializedName("features")
     @Expose
-    private List<Double> coordinates = null;
+    private List<Feature> features = null;
 
     public String getType() {
         return type;
@@ -25,22 +25,22 @@ public class Geometry {
         this.type = type;
     }
 
-    public List<Double> getCoordinates() {
-        return coordinates;
+    public List<Feature> getFeatures() {
+        return features;
     }
 
-    public void setCoordinates(List<Double> coordinates) {
-        this.coordinates = coordinates;
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("type", type).append("coordinates", coordinates).toString();
+        return new ToStringBuilder(this).append("type", type).append("features", features).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(type).append(coordinates).toHashCode();
+        return new HashCodeBuilder().append(type).append(features).toHashCode();
     }
 
     @Override
@@ -48,11 +48,11 @@ public class Geometry {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Geometry) == false) {
+        if ((other instanceof FeatureCollection) == false) {
             return false;
         }
-        Geometry rhs = ((Geometry) other);
-        return new EqualsBuilder().append(type, rhs.type).append(coordinates, rhs.coordinates).isEquals();
+        FeatureCollection rhs = ((FeatureCollection) other);
+        return new EqualsBuilder().append(type, rhs.type).append(features, rhs.features).isEquals();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.pgr208_exam
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,13 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
 import com.example.pgr208_exam.api.FeatureCollectionListener
 import com.example.pgr208_exam.api.GetFeatureCollection
-import com.example.pgr208_exam.gsontypes.Feature
-import com.example.pgr208_exam.gsontypes.FeatureCollection
+import com.example.pgr208_exam.gsontypes.collection.Feature
+import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),FeatureCollectionListener {
+class MainActivity : AppCompatActivity(),FeatureCollectionListener, View.OnClickListener {
 
     var url = "https://www.noforeignland.com/home/api/v1/places/"
 
@@ -27,12 +28,23 @@ class MainActivity : AppCompatActivity(),FeatureCollectionListener {
         adapter = FeatureAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter;
+        adapter.onClickListener = this
 
         if(Utils.isNetworkAvailable(this)) {
             GetFeatureCollection(this).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    override fun onClick(v: View?) {
+
+        var id = v?.tag as Long
+
+        var intent = Intent(this,FeatureActivity::class.java)
+        intent.putExtra(FeatureActivity.FEATURE_ID,id)
+        startActivity(intent)
 
     }
 

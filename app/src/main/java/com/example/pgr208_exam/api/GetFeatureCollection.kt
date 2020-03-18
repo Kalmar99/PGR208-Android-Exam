@@ -1,7 +1,7 @@
 package com.example.pgr208_exam.api
 
 import android.os.AsyncTask
-import com.example.pgr208_exam.gsontypes.FeatureCollection
+import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -71,7 +71,8 @@ class GetFeatureCollection(var listener: FeatureCollectionListener?) : AsyncTask
     private fun parseJson(json:String) : FeatureCollection {
         var gson = Gson()
 
-        val collection = gson.fromJson(json,FeatureCollection::class.java)
+        val collection = gson.fromJson(json,
+            FeatureCollection::class.java)
 
         return collection
     }

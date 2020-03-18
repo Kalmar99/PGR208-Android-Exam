@@ -1,10 +1,10 @@
 package com.example.pgr208_exam.api
 
-import com.example.pgr208_exam.gsontypes.FeatureCollection
+import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 
 interface FeatureCollectionListener {
 
-    fun onFeaturesSuccess(collection: FeatureCollection )
+    fun onFeaturesSuccess(collection: FeatureCollection)
     fun onFeaturesError()
     fun showProgress(show: Boolean)
 }

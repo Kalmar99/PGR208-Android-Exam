@@ -1,5 +1,5 @@
 
-package com.example.pgr208_exam.gsontypes;
+package com.example.pgr208_exam.gsontypes.collection;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
