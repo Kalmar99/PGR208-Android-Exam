@@ -9,20 +9,14 @@ import android.util.Log
 val DATABASE_VERSION: Int = 1
 val DATABASE_NAME: String = "feature_test"
 
-open class Database(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,null, DATABASE_VERSION) {
+open class Database(context: Context,db_name: String,db_version: Int,val sql: String) : SQLiteOpenHelper(context,db_name,null, db_version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
         //Used only for test DB Should not be here in final build
         db?.execSQL("DROP TABLE IF EXISTS ${DATABASE_NAME};")
 
-        val query = """
-            CREATE TABLE ${DATABASE_NAME}(
-            id INTEGER PRIMARY KEY UNIQUE NOT NULL,
-            name TEXT,
-            lat REAL,
-            lon REAL);
-            """
+        val query = sql
 
         db?.execSQL(query)
 

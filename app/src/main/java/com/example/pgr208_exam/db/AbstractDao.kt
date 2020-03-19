@@ -5,15 +5,19 @@ import android.database.Cursor
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import java.lang.Exception
 
-abstract class AbstractDao<T>(context: Context) : Database(context){
+abstract class AbstractDao<T>(val context: Context){
 
+
+    abstract val database: Database
 
     abstract fun insert(features: List<T>)
     abstract fun createObject(cursor: Cursor) : T
 
     fun fetchAll(sql: String) : ArrayList<T> {
 
-        val cursor = readableDatabase.rawQuery(sql,null)
+        val db = database.getReadableDatabase()
+
+        val cursor = db.rawQuery(sql,null)
 
         var features = ArrayList<T>()
 

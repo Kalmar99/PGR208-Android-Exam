@@ -9,10 +9,21 @@ import com.example.pgr208_exam.gsontypes.collection.Properties
 import java.lang.Exception
 
 
-
 class FeatureCollectionDao(context: Context) : AbstractDao<Feature>(context) {
 
+    val sql = """
+            CREATE TABLE feature_test(
+            id INTEGER PRIMARY KEY UNIQUE NOT NULL,
+            name TEXT,
+            lat REAL,
+            lon REAL);
+            """
+
+    override val database = Database(context,"feature_test",1, sql)
+
     override fun insert(features: List<Feature>) {
+
+        val db = database.getWritableDatabase();
 
         for(feature in features) {
 
@@ -22,7 +33,6 @@ class FeatureCollectionDao(context: Context) : AbstractDao<Feature>(context) {
             val lat = cords[0]
             val lon = cords[1]
 
-            val db = getWritableDatabase()
             var statement = db.compileStatement("INSERT INTO ${DATABASE_NAME} (id,name,lat,lon) VALUES(?,?,?,?)")
             statement.bindLong(1,id);
             statement.bindString(2,name);

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeatureCollection
+import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.db.FeatureCollectionDao
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
