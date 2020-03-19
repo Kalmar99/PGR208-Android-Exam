@@ -19,11 +19,9 @@ class FeatureCollectionDao(context: Context) : AbstractDao<Feature>(context) {
             lon REAL);
             """
 
-    override val database = Database(context,"feature_test",1, sql)
+    override val database = Database(context,"feature_test",1, sql).getWritableDatabase();
 
     override fun insert(features: List<Feature>) {
-
-        val db = database.getWritableDatabase();
 
         for(feature in features) {
 
@@ -33,12 +31,12 @@ class FeatureCollectionDao(context: Context) : AbstractDao<Feature>(context) {
             val lat = cords[0]
             val lon = cords[1]
 
-            var statement = db.compileStatement("INSERT INTO ${DATABASE_NAME} (id,name,lat,lon) VALUES(?,?,?,?)")
+            var statement = database!!.compileStatement("INSERT INTO 'feature_test' (id,name,lat,lon) VALUES(?,?,?,?)")
             statement.bindLong(1,id);
             statement.bindString(2,name);
             statement.bindDouble(3,lat)
             statement.bindDouble(4,lon);
-            statement.executeInsert()
+            statement.executeInsert();
 
         }
 

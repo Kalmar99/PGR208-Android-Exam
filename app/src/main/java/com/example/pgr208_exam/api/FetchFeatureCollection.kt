@@ -2,6 +2,7 @@ package com.example.pgr208_exam.api
 
 import android.content.Context
 import android.text.PrecomputedText
+import android.util.Log
 import com.example.pgr208_exam.db.AbstractDao
 import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.db.FeatureCollectionDao
@@ -20,31 +21,19 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Cont
         val features = getDataFromDb(featureCollectionDao,"SELECT * FROM feature_test")
 
         if(features != null) {
+            //if it find data in database, use that
+            Log.i("DATA: ", "from db")
             return features
         } else {
-            return getDataFromApi(params.get(0))
+            //If not get data from api
+            Log.i("DATA: ", "from Api")
+            val features = getDataFromApi(params.get(0))
+            featureCollectionDao.insert(features)
+            return features;
         }
 
     }
 
-    fun getDataFromDb(dao: AbstractDao<Feature>,sql: String) : ArrayList<Feature>? {
-        val featureArray = dao.fetchAll(sql)
-        if(featureArray.isEmpty()) {
-            return null;
-        } else {
-            return featureArray
-        }
-    }
-
-    fun getDataFromApi(url: String?) : ArrayList<Feature> {
-        try {
-            var response = webRequest(url!!)
-            var responseList = parseJson(response)
-            return responseList;
-        } catch (ex: Exception) {
-            throw(ex)
-        }
-    }
 
     override fun parseJson(json: String): ArrayList<Feature> {
         var gson = Gson()

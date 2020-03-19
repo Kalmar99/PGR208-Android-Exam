@@ -13,12 +13,7 @@ open class Database(context: Context,db_name: String,db_version: Int,val sql: St
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        //Used only for test DB Should not be here in final build
-        db?.execSQL("DROP TABLE IF EXISTS ${DATABASE_NAME};")
-
-        val query = sql
-
-        db?.execSQL(query)
+        db?.execSQL(sql)
 
     }
 

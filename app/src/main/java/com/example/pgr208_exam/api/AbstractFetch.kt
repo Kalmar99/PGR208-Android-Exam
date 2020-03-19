@@ -1,6 +1,7 @@
 package com.example.pgr208_exam.api
 
 import android.os.AsyncTask
+import com.example.pgr208_exam.db.AbstractDao
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.lang.Exception
@@ -23,6 +24,26 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
             throw (ex)
         }
 
+    }
+
+    fun getDataFromDb(dao: AbstractDao<T>, sql: String) : ArrayList<T>? {
+        val featureArray = dao.fetchAll(sql)
+        println("FeatureArray: " + featureArray)
+        if(featureArray.isEmpty()) {
+            return null;
+        } else {
+            return featureArray
+        }
+    }
+
+    fun getDataFromApi(url: String?) : ArrayList<T> {
+        try {
+            var response = webRequest(url!!)
+            var responseList = parseJson(response)
+            return responseList;
+        } catch (ex: Exception) {
+            throw(ex)
+        }
     }
 
     override fun onProgressUpdate(vararg values: Int?) {
