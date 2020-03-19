@@ -41,10 +41,10 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
         }
     }
 
-    override fun onFeaturesSuccess(collection: Feature) {
-        titleText.text = collection.place.name
+    override fun onFeaturesSuccess(collection: ArrayList<Feature>) {
+        titleText.text = collection[0].place.name
 
-            var path = collection?.place?.getBanner()
+            var path = collection[0].place?.getBanner()
             if(path != null) {
                 if(path.isEmpty()) {path = "http//"}
             }
@@ -56,7 +56,7 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
                 .into(banner)
 
 
-        comments.text = HtmlCompat.fromHtml(collection.place.comments,0);
+        comments.text = HtmlCompat.fromHtml(collection[0].place.comments,0);
     }
 
     override fun onFeaturesError() {

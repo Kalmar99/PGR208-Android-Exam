@@ -16,7 +16,7 @@ import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),AsyncListener<FeatureCollection>, View.OnClickListener {
+class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickListener {
 
     var url = "https://www.noforeignland.com/home/api/v1/places/"
 
@@ -64,14 +64,13 @@ class MainActivity : AppCompatActivity(),AsyncListener<FeatureCollection>, View.
         adapter.notifyDataSetChanged() // Notify the adapter that data has been updated
     }
 
-    override fun onFeaturesSuccess(collection: FeatureCollection) {
+    override fun onFeaturesSuccess(collection: ArrayList<Feature>) {
 
         if(isFinishing) {
             return;
         }
-
         //Sending only the features list as an arrayList
-        updateFeatures(ArrayList(collection.getFeatures()))
+        updateFeatures(collection)
     }
 
     override fun onFeaturesError() {

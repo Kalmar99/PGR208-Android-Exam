@@ -6,10 +6,10 @@ import okhttp3.Request
 import java.lang.Exception
 
 
-abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<String, Int, T>() {
+abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<String, Int, ArrayList<T>>() {
 
 
-    override fun doInBackground(vararg params: String?): T {
+    override fun doInBackground(vararg params: String?): ArrayList<T> {
         publishProgress(0)
 
         try {
@@ -32,6 +32,26 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
 
     }
 
+    override fun onPostExecute(result: ArrayList<T>) {
+
+        super.onPostExecute(result)
+
+        listener?.showProgress(false)
+
+        if (result != null) {
+            if (result.isEmpty()) {
+                listener?.onFeaturesError()
+            } else {
+                listener?.onFeaturesSuccess(result)
+            }
+        } else {
+            listener?.onFeaturesError()
+
+        }
+
+
+    }
+
 
      fun webRequest(url : String) : String {
 
@@ -46,6 +66,6 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
         return response.body!!.string()
     }
 
-     abstract fun parseJson(json:String) : T
+     abstract fun parseJson(json:String) : ArrayList<T>
 
 }

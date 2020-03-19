@@ -3,15 +3,16 @@ package com.example.pgr208_exam.api
 import android.content.Context
 import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.db.FeatureCollectionDao
+import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.google.gson.Gson
 import java.lang.Exception
 
-class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?,val context: Context) : AbstractFetch<FeatureCollection>(listener) {
+class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Context) : AbstractFetch<Feature>(listener) {
 
 
 
-    override fun doInBackground(vararg params: String?): FeatureCollection {
+    override fun doInBackground(vararg params: String?): ArrayList<Feature> {
         publishProgress(0)
 
         val db = Database(context)
@@ -19,8 +20,8 @@ class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?,val con
 
         try {
 
-            val collection = featureCollectionDao.fetchAll()
-            if(collection.getFeatures().isEmpty())
+            val collection = featureCollectionDao.fetchAll("SELECT * FROM feature_test")
+            if(collection.isEmpty())
             {
                 println("Cant find in db")
                 throw (Exception())
@@ -34,7 +35,6 @@ class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?,val con
                 var response = webRequest(params.get(0)!!)
                 var responseList = parseJson(response)
                 println("FOUND IN API")
-                featureCollectionDao.insert(responseList.getFeatures())
                 return responseList;
             } catch (ex: Exception) {
                 //Real error
@@ -42,61 +42,20 @@ class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?,val con
             }
         }
 
-        /*
-        try {
-
-            var response = webRequest(params.get(0)!!)
-            var responseList = parseJson(response)
-            return responseList;
-
-        } catch(ex: Exception) {
-            ex.printStackTrace()
-            throw (ex)
-        } */
 
     }
 
-    fun insertToDb(featureCollection: FeatureCollection) {
-
-
-
-    }
-
-    override fun onProgressUpdate(vararg values: Int?) {
-        super.onProgressUpdate(*values)
-
-        listener?.showProgress(true)
-
-    }
-
-    override fun onPostExecute(result: FeatureCollection) {
-        super.onPostExecute(result)
-
-        listener?.showProgress(false)
-
-        if (result != null) {
-            if (result.getFeatures().isEmpty()) {
-                listener?.onFeaturesError()
-            } else {
-                listener?.onFeaturesSuccess(result)
-            }
-        } else {
-            listener?.onFeaturesError()
-
-        }
-
-
-    }
-
-    override fun parseJson(json: String): FeatureCollection {
+    override fun parseJson(json: String): ArrayList<Feature> {
         var gson = Gson()
 
-        val collection = gson.fromJson(
+        var collection = gson.fromJson(
             json,
             FeatureCollection::class.java
         )
 
-        return collection
+        var ret = ArrayList<Feature>(collection.getFeatures())
+
+        return ret
     }
 
 
