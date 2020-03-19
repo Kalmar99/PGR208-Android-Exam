@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeatureCollection
-import com.example.pgr208_exam.db.Database
-import com.example.pgr208_exam.db.FeatureCollectionDao
+import com.example.pgr208_exam.db.AbstractDao
+import com.example.pgr208_exam.db.CacheData
 import com.example.pgr208_exam.gsontypes.collection.Feature
-import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,10 +31,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         recyclerView.adapter = adapter;
         adapter.onClickListener = this
 
-        /*
-        var featureListDao = FeatureCollectionDao(this)
-        featureListDao.fetchAll()
-        */
 
         if(Utils.isNetworkAvailable(this)) {
             FetchFeatureCollection(this,this).execute(url);
@@ -86,5 +81,15 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
+
+    override fun backgroundDownloadComplete() {
+        Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
+    }
+
+
+    override fun downloadInBackground(dao: AbstractDao<Feature>,features: ArrayList<Feature>) {
+        CacheData<Feature>(dao,features,this).execute(null)
+    }
+
 
 }

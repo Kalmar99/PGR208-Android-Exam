@@ -7,12 +7,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeature
+import com.example.pgr208_exam.db.AbstractDao
 import com.example.pgr208_exam.gsontypes.single.Feature
 import com.example.pgr208_exam.utils.Utils
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_feature.*
 
 class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
+
+    override fun backgroundDownloadComplete() {
+        //Done
+    }
+
+
+    override fun downloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
+        //Nothing
+    }
 
     companion object{
         const val FEATURE_ID = ""

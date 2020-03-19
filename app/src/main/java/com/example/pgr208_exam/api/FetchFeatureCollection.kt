@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.PrecomputedText
 import android.util.Log
 import com.example.pgr208_exam.db.AbstractDao
+import com.example.pgr208_exam.db.CacheData
 import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.db.FeatureCollectionDao
 import com.example.pgr208_exam.gsontypes.collection.Feature
@@ -21,14 +22,15 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Cont
         val features = getDataFromDb(featureCollectionDao,"SELECT * FROM feature_test")
 
         if(features != null) {
-            //if it find data in database, use that
+            //if it can find data in database, use that
             Log.i("DATA: ", "from db")
             return features
         } else {
             //If not get data from api
             Log.i("DATA: ", "from Api")
             val features = getDataFromApi(params.get(0))
-            featureCollectionDao.insert(features)
+            //Start a new async task to insert the data in the db
+            listener?.downloadInBackground(featureCollectionDao,features)
             return features;
         }
 
