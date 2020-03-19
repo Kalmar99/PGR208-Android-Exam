@@ -33,7 +33,7 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
     }
 
 
-    private fun webRequest(url : String) : String {
+     fun webRequest(url : String) : String {
 
         val client = OkHttpClient()
 

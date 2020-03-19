@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeatureCollection
+import com.example.pgr208_exam.db.FeatureCollectionDao
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.example.pgr208_exam.utils.Utils
@@ -30,8 +31,13 @@ class MainActivity : AppCompatActivity(),AsyncListener<FeatureCollection>, View.
         recyclerView.adapter = adapter;
         adapter.onClickListener = this
 
+        /*
+        var featureListDao = FeatureCollectionDao(this)
+        featureListDao.fetchAll()
+        */
+
         if(Utils.isNetworkAvailable(this)) {
-            FetchFeatureCollection(this).execute(url);
+            FetchFeatureCollection(this,this).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }

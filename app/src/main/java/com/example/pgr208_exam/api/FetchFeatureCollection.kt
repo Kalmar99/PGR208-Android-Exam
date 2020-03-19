@@ -1,8 +1,66 @@
 package com.example.pgr208_exam.api
 
+import android.content.Context
+import com.example.pgr208_exam.db.Database
+import com.example.pgr208_exam.db.FeatureCollectionDao
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.google.gson.Gson
-class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?) : AbstractFetch<FeatureCollection>(listener) {
+import java.lang.Exception
+
+class FetchFeatureCollection(listener: AsyncListener<FeatureCollection>?,val context: Context) : AbstractFetch<FeatureCollection>(listener) {
+
+
+
+    override fun doInBackground(vararg params: String?): FeatureCollection {
+        publishProgress(0)
+
+        val db = Database(context)
+        val featureCollectionDao = FeatureCollectionDao(context)
+
+        try {
+
+            val collection = featureCollectionDao.fetchAll()
+            if(collection.getFeatures().isEmpty())
+            {
+                println("Cant find in db")
+                throw (Exception())
+            } else {
+                println("FOUND IN DB")
+                return collection;
+            }
+        } catch (ex: Exception) {
+            //Cant find data in database
+            try {
+                var response = webRequest(params.get(0)!!)
+                var responseList = parseJson(response)
+                println("FOUND IN API")
+                featureCollectionDao.insert(responseList.getFeatures())
+                return responseList;
+            } catch (ex: Exception) {
+                //Real error
+                throw(ex)
+            }
+        }
+
+        /*
+        try {
+
+            var response = webRequest(params.get(0)!!)
+            var responseList = parseJson(response)
+            return responseList;
+
+        } catch(ex: Exception) {
+            ex.printStackTrace()
+            throw (ex)
+        } */
+
+    }
+
+    fun insertToDb(featureCollection: FeatureCollection) {
+
+
+
+    }
 
     override fun onProgressUpdate(vararg values: Int?) {
         super.onProgressUpdate(*values)
