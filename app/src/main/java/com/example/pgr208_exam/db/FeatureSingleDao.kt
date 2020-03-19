@@ -2,11 +2,32 @@ package com.example.pgr208_exam.db
 
 import android.content.Context
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import com.example.pgr208_exam.gsontypes.single.Feature
-/*
-class FeatureSingleDao(context: Context) : AbstractDao<Feature>(context) {
+import com.example.pgr208_exam.gsontypes.single.Place
+
+
+class FeatureSingleDao(context: Context,database: SQLiteDatabase) : AbstractDao<Feature>(context,database) {
+
+    val db_name = "feature_test_single";
+
+
     override fun insert(features: List<Feature>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        for(feature in features) {
+
+            val id = feature.place.getId();
+            val banner = feature.place.getBanner();
+            val comments = feature.place.getComments();
+
+            var statement = database!!.compileStatement("INSERT INTO '${db_name}' (id,banner,comments) VALUES(?,?,?)")
+            statement.bindLong(1,id);
+            statement.bindString(2,banner)
+            statement.bindString(3,comments)
+            statement.executeInsert()
+
+        }
+
     }
 
     override fun createObject(cursor: Cursor): Feature {
@@ -16,7 +37,20 @@ class FeatureSingleDao(context: Context) : AbstractDao<Feature>(context) {
         val lat = cursor.getDouble(cursor.getColumnIndex("lat"))
         val lon = cursor.getDouble(cursor.getColumnIndex("lon"))
         val banner = cursor.getString(cursor.getColumnIndex("banner"))
+        val comments = cursor.getString(cursor.getColumnIndex("comments"))
 
+        var feature = Feature()
+        var place = Place()
+        place.setId(id);
+        place.setName(name)
+        place.setLat(lat)
+        place.setLon(lon)
+        place.setBanner(banner)
+        place.setComments(comments)
+
+        feature.setPlace(place)
+        return feature;
     }
 
-}*/
+
+}

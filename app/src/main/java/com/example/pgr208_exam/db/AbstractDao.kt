@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteDatabase
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import java.lang.Exception
 
-abstract class AbstractDao<T>(val context: Context){
+abstract class AbstractDao<T>(val context: Context,val database: SQLiteDatabase){
 
 
-    abstract val database: SQLiteDatabase
+    //abstract val database: SQLiteDatabase
 
     abstract fun insert(features: List<T>)
     abstract fun createObject(cursor: Cursor) : T
@@ -32,6 +32,8 @@ abstract class AbstractDao<T>(val context: Context){
             } catch(ex: Exception) {
                 // If data is not found in database this should return null so i can try api call
                 throw ex;
+            } finally {
+                cursor.close();
             }
 
         }

@@ -1,6 +1,7 @@
 package com.example.pgr208_exam.api
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.text.PrecomputedText
 import android.util.Log
 import com.example.pgr208_exam.db.AbstractDao
@@ -12,12 +13,12 @@ import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.google.gson.Gson
 import java.lang.Exception
 
-class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Context) : AbstractFetch<Feature>(listener) {
+class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Context,val db: SQLiteDatabase) : AbstractFetch<Feature>(listener) {
 
     override fun doInBackground(vararg params: String?): ArrayList<Feature> {
         publishProgress(0)
 
-        val featureCollectionDao = FeatureCollectionDao(context)
+        val featureCollectionDao = FeatureCollectionDao(context,db)
 
         val features = getDataFromDb(featureCollectionDao,"SELECT * FROM feature_test")
 

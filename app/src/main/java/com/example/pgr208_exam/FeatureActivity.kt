@@ -8,6 +8,8 @@ import androidx.core.text.HtmlCompat
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeature
 import com.example.pgr208_exam.db.AbstractDao
+import com.example.pgr208_exam.db.CacheData
+import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.gsontypes.single.Feature
 import com.example.pgr208_exam.utils.Utils
 import com.squareup.picasso.Picasso
@@ -16,12 +18,12 @@ import kotlinx.android.synthetic.main.activity_feature.*
 class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
     override fun backgroundDownloadComplete() {
-        //Done
+        Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
     }
 
 
     override fun downloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
-        //Nothing
+        CacheData<Feature>(dao,features,this).execute(null)
     }
 
     companion object{
@@ -43,9 +45,11 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
         }
 
         var url = endpoint + featureId + "\n"
+        val db = Database(this,"featureDB",1).writableDatabase
+
 
         if(Utils.isNetworkAvailable(this)) {
-            FetchFeature(this).execute(url);
+            FetchFeature(this,this,db,featureId).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }

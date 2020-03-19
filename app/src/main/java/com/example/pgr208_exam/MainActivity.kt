@@ -11,6 +11,7 @@ import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeatureCollection
 import com.example.pgr208_exam.db.AbstractDao
 import com.example.pgr208_exam.db.CacheData
+import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,9 +32,10 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         recyclerView.adapter = adapter;
         adapter.onClickListener = this
 
+        val db = Database(this,"featureDB",1).writableDatabase
 
         if(Utils.isNetworkAvailable(this)) {
-            FetchFeatureCollection(this,this).execute(url);
+            FetchFeatureCollection(this,this,db).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }

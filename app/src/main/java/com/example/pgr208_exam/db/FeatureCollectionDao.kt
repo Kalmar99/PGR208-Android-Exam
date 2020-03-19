@@ -2,6 +2,7 @@ package com.example.pgr208_exam.db
 
 import android.content.Context
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.example.pgr208_exam.gsontypes.collection.Geometry
@@ -9,7 +10,7 @@ import com.example.pgr208_exam.gsontypes.collection.Properties
 import java.lang.Exception
 
 
-class FeatureCollectionDao(context: Context) : AbstractDao<Feature>(context) {
+class FeatureCollectionDao(context: Context,database: SQLiteDatabase) : AbstractDao<Feature>(context,database) {
 
     val sql = """
             CREATE TABLE feature_test(
@@ -19,7 +20,7 @@ class FeatureCollectionDao(context: Context) : AbstractDao<Feature>(context) {
             lon REAL);
             """
 
-    override val database = Database(context,"feature_test",1, sql).getWritableDatabase();
+    //override val database = Database(context,"feature_test",1, sql).getWritableDatabase();
 
     override fun insert(features: List<Feature>) {
 
