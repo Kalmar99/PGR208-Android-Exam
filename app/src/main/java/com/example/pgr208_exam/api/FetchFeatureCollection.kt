@@ -4,10 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.text.PrecomputedText
 import android.util.Log
-import com.example.pgr208_exam.db.AbstractDao
-import com.example.pgr208_exam.db.CacheData
-import com.example.pgr208_exam.db.Database
-import com.example.pgr208_exam.db.FeatureCollectionDao
+import com.example.pgr208_exam.db.*
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.gsontypes.collection.FeatureCollection
 import com.google.gson.Gson
@@ -18,9 +15,9 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Cont
     override fun doInBackground(vararg params: String?): ArrayList<Feature> {
         publishProgress(0)
 
-        val featureCollectionDao = FeatureCollectionDao(context,db)
+        val featureCollectionDao = FeatureCollectionDao(context,db,listener)
 
-        val features = getDataFromDb(featureCollectionDao,"SELECT * FROM feature_test")
+        val features = getDataFromDb(featureCollectionDao,"SELECT * FROM ${FEATURE_COLLECTION_TABLE}")
 
         if(features != null) {
             //if it can find data in database, use that
@@ -31,12 +28,11 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Cont
             Log.i("DATA: ", "from Api")
             val features = getDataFromApi(params.get(0))
             //Start a new async task to insert the data in the db
-            listener?.downloadInBackground(featureCollectionDao,features)
+            listener?.onDownloadInBackground(featureCollectionDao,features)
             return features;
         }
 
     }
-
 
     override fun parseJson(json: String): ArrayList<Feature> {
         var gson = Gson()
@@ -46,9 +42,9 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val context: Cont
             FeatureCollection::class.java
         )
 
-        var ret = ArrayList<Feature>(collection.getFeatures())
+        var features = ArrayList<Feature>(collection.getFeatures())
 
-        return ret
+        return features
     }
 
 

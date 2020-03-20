@@ -5,17 +5,19 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
+val DB_NAME = "feature_cache"
+val DB_VERSION = 1
+val FEATURE_COLLECTION_TABLE = "feature_collection"
+val FEATURE_SINGLE_TABLE = "feature_single"
 
-val DATABASE_VERSION: Int = 1
-val DATABASE_NAME: String = "feature_test"
 
-open class Database(context: Context,db_name: String,db_version: Int) : SQLiteOpenHelper(context,db_name,null, db_version) {
+open class Database(context: Context) : SQLiteOpenHelper(context,DB_NAME,null, DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
         //Table 1
         val sql = """
-            CREATE TABLE feature_test(
+            CREATE TABLE ${FEATURE_COLLECTION_TABLE}(
             id INTEGER PRIMARY KEY UNIQUE NOT NULL,
             name TEXT,
             lat REAL,
@@ -24,7 +26,7 @@ open class Database(context: Context,db_name: String,db_version: Int) : SQLiteOp
         db?.execSQL(sql)
 
         val sql2 = """
-            CREATE TABLE feature_test_single(
+            CREATE TABLE ${FEATURE_SINGLE_TABLE}(
             id INTEGER PRIMARY KEY UNIQUE NOT NULL,
             banner TEXT,
             comments TEXT);

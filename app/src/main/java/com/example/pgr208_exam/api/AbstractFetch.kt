@@ -28,7 +28,6 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
 
     fun getDataFromDb(dao: AbstractDao<T>, sql: String) : ArrayList<T>? {
         val featureArray = dao.fetchAll(sql)
-        println("FeatureArray: " + featureArray)
         if(featureArray.isEmpty()) {
             return null;
         } else {
@@ -48,7 +47,6 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
 
     override fun onProgressUpdate(vararg values: Int?) {
         super.onProgressUpdate(*values)
-
         listener?.showProgress(true)
 
     }
@@ -73,8 +71,7 @@ abstract class AbstractFetch<T>(var listener: AsyncListener<T>?) : AsyncTask<Str
 
     }
 
-
-     fun webRequest(url : String) : String {
+    fun webRequest(url : String) : String {
 
         val client = OkHttpClient()
 

@@ -17,12 +17,21 @@ import kotlinx.android.synthetic.main.activity_feature.*
 
 class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
-    override fun backgroundDownloadComplete() {
+    override fun onUpdateBackground(show: Boolean) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateBackground(progress: Int) {
+        //NO
+    }
+
+
+    override fun onBackgroundDownloadComplete() {
         Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
     }
 
 
-    override fun downloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
+    override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
         CacheData<Feature>(dao,features,this).execute(null)
     }
 
@@ -38,14 +47,15 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
         var featureId: Long;
 
-        if(this?.intent.hasExtra(FEATURE_ID)){
-            featureId = this?.intent.getLongExtra(FEATURE_ID,0)
+        if(this.intent.hasExtra(FEATURE_ID)){
+            featureId = this.intent.getLongExtra(FEATURE_ID,0)
         } else {
             featureId = 0;
         }
 
         var url = endpoint + featureId + "\n"
-        val db = Database(this,"featureDB",1).writableDatabase
+
+        val db = Database(this).writableDatabase
 
 
         if(Utils.isNetworkAvailable(this)) {

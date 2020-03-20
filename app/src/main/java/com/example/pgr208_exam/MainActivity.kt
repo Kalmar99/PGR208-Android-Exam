@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
         searchBar.setOnQueryTextListener(this)
 
-        val db = Database(this,"featureDB",1).writableDatabase
+        val db = Database(this).writableDatabase
 
         if(Utils.isNetworkAvailable(this)) {
             FetchFeatureCollection(this,this,db).execute(url);
@@ -100,12 +100,22 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    override fun backgroundDownloadComplete() {
+
+
+    override fun onBackgroundDownloadComplete() {
         Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
     }
 
+    override fun updateBackground(progress: Int) {
+        cacheProgressBar.setProgress(progress);
+    }
 
-    override fun downloadInBackground(dao: AbstractDao<Feature>,features: ArrayList<Feature>) {
+    override fun onUpdateBackground(show: Boolean) {
+        cacheProgressBar.visibility = if (show) View.VISIBLE else View.GONE
+        cacheWarning.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    override fun onDownloadInBackground(dao: AbstractDao<Feature>,features: ArrayList<Feature>) {
         CacheData<Feature>(dao,features,this).execute(null)
     }
 

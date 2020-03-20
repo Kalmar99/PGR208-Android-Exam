@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pgr208_exam.R
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import kotlinx.android.synthetic.main.feature_item_layout.view.*
-import kotlin.reflect.typeOf
 
 class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickListener: View.OnClickListener? = null)  : RecyclerView.Adapter<FeatureAdapter.FeatureViewHolder>(), Filterable {
 
