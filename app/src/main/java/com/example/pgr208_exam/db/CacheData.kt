@@ -18,5 +18,10 @@ class CacheData<T>(val dao: AbstractDao<T>,val features: ArrayList<T>,val listen
         listener?.onUpdateBackground(true);
     }
 
+    override fun onPostExecute(result: Unit?) {
+        super.onPostExecute(result)
+        listener?.onBackgroundDownloadComplete()
+    }
+
 
 }

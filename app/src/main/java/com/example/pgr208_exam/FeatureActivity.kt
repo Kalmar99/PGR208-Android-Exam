@@ -18,13 +18,12 @@ import kotlinx.android.synthetic.main.activity_feature.*
 class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
     override fun onUpdateBackground(show: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       //
     }
 
     override fun updateBackground(progress: Int) {
         //NO
     }
-
 
     override fun onBackgroundDownloadComplete() {
         Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()

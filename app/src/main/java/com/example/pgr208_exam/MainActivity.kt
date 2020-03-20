@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
 
     override fun onBackgroundDownloadComplete() {
+        onUpdateBackground(false)
         Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
     }
 
@@ -111,8 +112,8 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
     }
 
     override fun onUpdateBackground(show: Boolean) {
-        cacheProgressBar.visibility = if (show) View.VISIBLE else View.GONE
-        cacheWarning.visibility = if (show) View.VISIBLE else View.GONE
+        cacheLayout.visibility = if (show) View.VISIBLE else View.GONE
+
     }
 
     override fun onDownloadInBackground(dao: AbstractDao<Feature>,features: ArrayList<Feature>) {
