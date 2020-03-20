@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
@@ -17,7 +18,7 @@ import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickListener {
+class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickListener, SearchView.OnQueryTextListener {
 
     var url = "https://www.noforeignland.com/home/api/v1/places/"
 
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         recyclerView.adapter = adapter;
         adapter.onClickListener = this
 
+
+        searchBar.setOnQueryTextListener(this)
+
         val db = Database(this,"featureDB",1).writableDatabase
 
         if(Utils.isNetworkAvailable(this)) {
@@ -41,6 +45,17 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         }
 
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        adapter.getFilter().filter(newText);
+        return false;
+
+    }
+
 
     override fun onClick(v: View?) {
 
@@ -57,7 +72,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         if(isFinishing) {
             return;
         }
-
+        adapter.fullList.addAll(features)
         adapter.list = features // update list
         adapter.notifyDataSetChanged() // Notify the adapter that data has been updated
     }
@@ -70,6 +85,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         //Sending only the features list as an arrayList
         updateFeatures(collection)
     }
+
 
     override fun onFeaturesError() {
         Toast.makeText(this, getString(R.string.feature_error), Toast.LENGTH_LONG).show()

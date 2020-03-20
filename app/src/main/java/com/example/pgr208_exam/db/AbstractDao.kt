@@ -26,7 +26,6 @@ abstract class AbstractDao<T>(val context: Context,val database: SQLiteDatabase)
         with(cursor) {
             try {
                 while(moveToNext()) {
-
                     features.add(createObject(cursor));
                 }
             } catch(ex: Exception) {
