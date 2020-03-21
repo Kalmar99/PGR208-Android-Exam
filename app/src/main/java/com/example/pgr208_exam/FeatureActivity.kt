@@ -17,18 +17,13 @@ import kotlinx.android.synthetic.main.activity_feature.*
 
 class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
-    override fun onUpdateBackground(show: Boolean) {
-       //
-    }
+    override fun onUpdateBackground(show: Boolean) {}
 
-    override fun updateBackground(progress: Int) {
-        //NO
-    }
+    override fun updateBackground(progress: Int) {}
 
     override fun onBackgroundDownloadComplete() {
-        Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
     }
-
 
     override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
         CacheData<Feature>(dao,features,this).execute(null)
