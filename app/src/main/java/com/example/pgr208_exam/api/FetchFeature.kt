@@ -9,12 +9,12 @@ import com.example.pgr208_exam.db.FeatureDao
 import com.example.pgr208_exam.gsontypes.single.Feature
 import com.google.gson.Gson
 
-class FetchFeature(listener: AsyncListener<Feature>?,val context: Context,val db: SQLiteDatabase,val id: Long) : AbstractFetch<Feature>(listener) {
+class FetchFeature(listener: AsyncListener<Feature>?,val cacheListener: AsyncCacheListener<Feature>?,val context: Context,val db: SQLiteDatabase,val id: Long) : AbstractFetch<Feature>(listener) {
 
     override fun doInBackground(vararg params: String?): ArrayList<Feature> {
         publishProgress(0)
 
-        val dao = FeatureDao(context,db,null)
+        val dao = FeatureDao(context,db)
 
         val features = getDataFromDb(dao,
             """
@@ -34,7 +34,7 @@ class FetchFeature(listener: AsyncListener<Feature>?,val context: Context,val db
             Log.i("DATA: ", "from Api")
             val features = getDataFromApi(params.get(0))
             //Start a new async task to insert the data in the db
-            listener?.onDownloadInBackground(dao,features)
+            cacheListener?.onDownloadInBackground(dao,features)
             return features;
         }
 

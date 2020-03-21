@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeatureCollection
+import com.example.pgr208_exam.api.FetchFeatureList
 import com.example.pgr208_exam.db.AbstractDao
 import com.example.pgr208_exam.db.CacheData
 import com.example.pgr208_exam.db.Database
@@ -33,13 +34,12 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         recyclerView.adapter = adapter;
         adapter.onClickListener = this
 
-
         searchBar.setOnQueryTextListener(this)
 
         val db = Database(this).writableDatabase
 
         if(Utils.isNetworkAvailable(this)) {
-            FetchFeatureCollection(this,this,db).execute(url);
+            FetchFeatureList(this,null,this,db).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }
@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         return false;
 
     }
-
 
     override fun onClick(v: View?) {
 
@@ -86,7 +85,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         updateFeatures(collection)
     }
 
-
     override fun onFeaturesError() {
         Toast.makeText(this, getString(R.string.feature_error), Toast.LENGTH_LONG).show()
     }
@@ -99,26 +97,5 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
-
-
-
-    override fun onBackgroundDownloadComplete() {
-        onUpdateBackground(false)
-        Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
-    }
-
-    override fun updateBackground(progress: Int) {
-        cacheProgressBar.setProgress(progress);
-    }
-
-    override fun onUpdateBackground(show: Boolean) {
-        cacheLayout.visibility = if (show) View.VISIBLE else View.GONE
-
-    }
-
-    override fun onDownloadInBackground(dao: AbstractDao<Feature>,features: ArrayList<Feature>) {
-        CacheData<Feature>(dao,features,this).execute(null)
-    }
-
 
 }

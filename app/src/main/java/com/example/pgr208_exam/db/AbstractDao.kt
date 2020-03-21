@@ -8,7 +8,7 @@ import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import java.lang.Exception
 
-abstract class AbstractDao<T>(val context: Context, val database: SQLiteDatabase, var listener: AsyncListener<T>?){
+abstract class AbstractDao<T>(val context: Context, val database: SQLiteDatabase){
 
 
     //abstract val database: SQLiteDatabase

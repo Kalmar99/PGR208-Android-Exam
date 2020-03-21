@@ -3,27 +3,27 @@ package com.example.pgr208_exam.db
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.gsontypes.single.Feature
 import com.example.pgr208_exam.gsontypes.single.Place
+import java.lang.Exception
 
 
-class FeatureDao(context: Context, database: SQLiteDatabase,listener: AsyncListener<Feature>?) : AbstractDao<Feature>(context,database,listener) {
+class FeatureDao(context: Context, database: SQLiteDatabase) : AbstractDao<Feature>(context,database) {
 
     override fun insert(features: List<Feature>) {
 
-        for(feature in features) {
-
-            val id = feature.place.getId();
-            val banner = feature.place.getBanner();
-            val comments = feature.place.getComments();
-
-            var statement = database!!.compileStatement("INSERT INTO '${FEATURE_SINGLE_TABLE}' (id,banner,comments) VALUES(?,?,?)")
-            statement.bindLong(1,id);
-            statement.bindString(2,banner)
-            statement.bindString(3,comments)
-            statement.executeInsert()
-        }
+            for(feature in features) {
+                var statement = database!!.compileStatement("INSERT INTO '${FEATURE_SINGLE_TABLE}' (id,banner,comments) VALUES(?,?,?)")
+                val id = feature.place.getId();
+                val banner = feature.place.getBanner();
+                val comments = feature.place.getComments();
+                statement.bindLong(1,id);
+                statement.bindString(2,banner)
+                statement.bindString(3,comments)
+                statement.executeInsert()
+            }
 
     }
 

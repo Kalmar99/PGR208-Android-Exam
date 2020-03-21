@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     >
 
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="Sailor's Harbour"
         android:textSize="40sp"
-        android:gravity="center_horizontal"
-        android:textColor="@color/darkgray" />
+        android:id="@+id/Title"
+        android:textColor="@color/darkgray"
+        />
+
+    <LinearLayout
+        android:id="@+id/cacheLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/cacheWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:visibility="visible"
+            android:text="Caching Data - please dont close the app"
+            android:textColor="@color/darkgray" />
+
+        <ProgressBar
+            android:id="@+id/cacheProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/cache_progress_bar" />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

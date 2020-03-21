@@ -1,10 +1,12 @@
 package com.example.pgr208_exam
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import com.example.pgr208_exam.api.AsyncCacheListener
 import com.example.pgr208_exam.api.AsyncListener
 import com.example.pgr208_exam.api.FetchFeature
 import com.example.pgr208_exam.db.AbstractDao
@@ -15,19 +17,7 @@ import com.example.pgr208_exam.utils.Utils
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_feature.*
 
-class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
-
-    override fun onUpdateBackground(show: Boolean) {}
-
-    override fun updateBackground(progress: Int) {}
-
-    override fun onBackgroundDownloadComplete() {
-        //Toast.makeText(this, "Finished Downloading", Toast.LENGTH_LONG).show()
-    }
-
-    override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
-        CacheData<Feature>(dao,features,this).execute(null)
-    }
+class FeatureActivity : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheListener<Feature> {
 
     companion object{
         const val FEATURE_ID = ""
@@ -51,9 +41,8 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
 
         val db = Database(this).writableDatabase
 
-
         if(Utils.isNetworkAvailable(this)) {
-            FetchFeature(this,this,db,featureId).execute(url);
+            FetchFeature(this,this,this,db,featureId).execute(url);
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
         }
@@ -78,7 +67,7 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
     }
 
     override fun onFeaturesError() {
-        //Nothing
+        Log.w("Error: ","An Error occured when trying to get features")
     }
 
     override fun showProgress(show: Boolean) {
@@ -90,5 +79,12 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature> {
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
+    override fun onUpdateBackground(show: Boolean) {}
+    override fun updateBackground(progress: Int) {}
+    override fun onBackgroundDownloadComplete() {}
+
+    override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
+        CacheData<Feature>(dao,features,this).execute(null)
+    }
 
 }
