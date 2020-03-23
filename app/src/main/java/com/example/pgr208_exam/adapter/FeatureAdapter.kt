@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pgr208_exam.MapsActivity
 import com.example.pgr208_exam.R
@@ -89,6 +88,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
             itemView.tag = featureItm.properties.getId();
             itemView.setOnClickListener(onClickListener)
 
+            //This can use same onclick as the other
             itemView.locationIcon.setOnClickListener(View.OnClickListener {
                 var intent = Intent(context,MapsActivity::class.java)
                 intent.putExtra("lat",featureItm.geometry.coordinates[1])
