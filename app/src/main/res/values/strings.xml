@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">PGR208-Exam</string>
+    <string name="app_name">Sailors Harbour</string>
     <string name="feature_error">Error finding feature</string>
     <string name="connectivity_error">Cant connect to internet</string>
     <string name="search">Search</string>
+    <string name="CachingDataWarning">Caching Data - please dont close the app</string>
 </resources>

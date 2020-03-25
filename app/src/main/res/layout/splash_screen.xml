@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,7 +12,7 @@
         android:id="@+id/Title"
         android:textColor="@color/darkgray"
         />
-
+    <!-- Using a layout to wrap them so its easyer to hide/show the bar -->
     <LinearLayout
         android:id="@+id/cacheLayout"
         android:layout_width="match_parent"
@@ -31,17 +29,13 @@
             android:padding="5dp"
             android:textAlignment="center"
             android:visibility="visible"
-            android:text="Caching Data - please dont close the app"
+            android:text="@string/CachingDataWarning"
             android:textColor="@color/darkgray" />
 
         <ProgressBar
             android:id="@+id/cacheProgressBar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:progressDrawable="@drawable/cache_progress_bar" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-
 </RelativeLayout>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#EFEFEF</color>
+    <color name="windowBackground">#EFEFEF</color>
     <color name="colorPrimaryDark">#384455</color>
+    <color name="colorPrimary">#384455</color>
     <color name="colorText">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
 

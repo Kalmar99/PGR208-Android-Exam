@@ -17,7 +17,7 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyAKw_H_8BjDikou9rLoMhzlv4rY9agBxqw" />
 
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -3,45 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="12dp"
-    android:layout_margin="2dp"
+    android:layout_margin="5dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardElevation="4dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+        android:paddingTop="8dp">
 
     <TextView
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
+        android:layout_alignParentLeft="true"
         android:text="Name"
         android:textFontWeight="600"
         android:textSize="20sp"
         android:id="@+id/textViewName"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/black" />
     <ImageView
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:id="@+id/locationIcon"
         android:layout_height="wrap_content"
-        android:src="@drawable/location_icon"
-        />
-</LinearLayout>
-
-
-
+        android:src="@drawable/location_icon"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
