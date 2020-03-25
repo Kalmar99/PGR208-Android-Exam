@@ -83,6 +83,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
     inner class FeatureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindFeatureWithViewHolder(featureItm: Feature) {
+
             itemView.textViewName.text = featureItm.properties.getName();
             itemView.tag = featureItm.properties.getId();
             itemView.setOnClickListener(onClickListener)
