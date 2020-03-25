@@ -8,21 +8,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <SearchView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/searchBar"
         android:hint="@string/search"
-        android:textColorHint="@color/black"
-        android:textSize="25sp"
-        style="@style/SearchBar"
         android:paddingLeft="10dp"
         android:layout_margin="10dp"
-
         />
-
-
 
     <ProgressBar
         android:visibility="invisible"
@@ -35,16 +28,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="4dp"
-        style="@style/RecyclerView"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>
-
-
-
-
-
-
 
 </LinearLayout>

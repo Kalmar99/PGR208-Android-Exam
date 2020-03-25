@@ -9,10 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pgr208_exam.adapter.FeatureAdapter
 import com.example.pgr208_exam.api.AsyncListener
-import com.example.pgr208_exam.api.FetchFeatureCollection
 import com.example.pgr208_exam.api.FetchFeatureList
-import com.example.pgr208_exam.db.AbstractDao
-import com.example.pgr208_exam.db.CacheData
 import com.example.pgr208_exam.db.Database
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.utils.Utils
@@ -33,6 +30,8 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter;
         adapter.onClickListener = this
+        adapter.context = this;
+
 
         searchBar.setOnQueryTextListener(this)
 
@@ -59,6 +58,17 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
     override fun onClick(v: View?) {
 
         var id = v?.tag as Long
+
+
+
+            println("Location pressed")
+            /*
+            var intent = Intent(context,MapsActivity::class.java)
+            intent.putExtra("lat",featureItm.geometry.coordinates[0])
+            intent.putExtra("lon",featureItm.geometry.coordinates[1])
+            intent.putExtra("name",featureItm.properties.name)
+            context.startActivity(intent); */
+
 
         var intent = Intent(this,FeatureActivity::class.java)
         intent.putExtra(FeatureActivity.FEATURE_ID,id)

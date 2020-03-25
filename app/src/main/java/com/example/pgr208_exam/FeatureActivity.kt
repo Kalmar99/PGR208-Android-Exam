@@ -1,5 +1,6 @@
 package com.example.pgr208_exam
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -62,7 +63,13 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheL
                 .error(R.drawable.notfound)
                 .into(banner)
 
-
+        locationIcon.setOnClickListener(View.OnClickListener {
+            var intent = Intent(this,MapsActivity::class.java)
+            intent.putExtra("lat",collection[0].place.lat)
+            intent.putExtra("lon",collection[0].place.lon)
+            intent.putExtra("name",collection[0].place.name)
+            startActivity(intent);
+        })
         comments.text = HtmlCompat.fromHtml(collection[0].place.comments,0);
     }
 
@@ -86,5 +93,7 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheL
     override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
         CacheData<Feature>(dao,features,this).execute(null)
     }
+
+
 
 }

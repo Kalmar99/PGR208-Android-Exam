@@ -40,6 +40,7 @@ class SplashScreen : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheList
     fun nextScreen() {
         val intent = Intent(this,MainActivity::class.java);
         startActivity(intent);
+        finish()
     }
 
     override fun onFeaturesSuccess(collection: ArrayList<Feature>) {
