@@ -4,4 +4,9 @@
     <string name="connectivity_error">Cant connect to internet</string>
     <string name="search">Search</string>
     <string name="CachingDataWarning">Caching Data - please dont close the app</string>
+
+    <!-- Vars to store lat,lon,name from icon click in FeatureAdapter -->
+    <item type="id" name="lat"></item>
+    <item type="id" name="lon"></item>
+    <item type="id" name="name"></item>
 </resources>

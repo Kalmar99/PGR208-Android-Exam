@@ -18,7 +18,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
     var fullList: ArrayList<Feature> = ArrayList()
     lateinit var context: Context;
 
-    inner class searchFilter(val adapter: FeatureAdapter) : Filter() {
+    inner class SearchFilter(val adapter: FeatureAdapter) : Filter() {
 
         var filteredList = ArrayList<Feature>()
 
@@ -62,7 +62,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
     }
 
     override fun getFilter(): Filter {
-        return searchFilter(this)
+        return SearchFilter(this)
     }
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): FeatureAdapter.FeatureViewHolder {
@@ -88,15 +88,22 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
             itemView.textViewName.text = featureItm.properties.getName();
             itemView.tag = featureItm.properties.getId();
             itemView.setOnClickListener(onClickListener)
-
+            itemView.locationIcon.tag = -1;
+            itemView.locationIcon.setOnClickListener(onClickListener)
+            itemView.locationIcon.setTag(R.id.lat,featureItm.geometry.coordinates[1])
+            itemView.locationIcon.setTag(R.id.lon,featureItm.geometry.coordinates[0])
+            itemView.locationIcon.setTag(R.id.name,featureItm.properties.name)
             //This can use same onclick as the other
+            /*
             itemView.locationIcon.setOnClickListener(View.OnClickListener {
                 var intent = Intent(context,MapsActivity::class.java)
                 intent.putExtra("lat",featureItm.geometry.coordinates[1])
                 intent.putExtra("lon",featureItm.geometry.coordinates[0])
                 intent.putExtra("name",featureItm.properties.name)
                 context.startActivity(intent);
-            })
+            }) */
         }
     }
+
+
 }

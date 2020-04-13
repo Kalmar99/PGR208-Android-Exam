@@ -42,7 +42,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback  {
         var location = LatLng(lat, lon)
 
         googleMap?.addMarker(MarkerOptions().position(location).title(name))
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(location))
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
+        googleMap?.animateCamera(CameraUpdateFactory.zoomTo(14f), 2000, null);
 
     }
 

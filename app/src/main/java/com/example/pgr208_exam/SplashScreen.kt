@@ -2,6 +2,7 @@ package com.example.pgr208_exam
 
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.splash_screen.*
 class SplashScreen : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheListener<Feature> {
 
     var doneDownload = true;
+    lateinit var db: SQLiteDatabase;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,7 @@ class SplashScreen : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheList
 
         var url = "https://www.noforeignland.com/home/api/v1/places/"
 
-        val db = Database(this).writableDatabase
+        db = Database(this).writableDatabase
 
         if(Utils.isNetworkAvailable(this)) {
             FetchFeatureCollection(this,this,this,db).execute(url);
@@ -38,6 +40,7 @@ class SplashScreen : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheList
     }
 
     fun nextScreen() {
+        db.close()
         val intent = Intent(this,MainActivity::class.java);
         startActivity(intent);
         finish()
