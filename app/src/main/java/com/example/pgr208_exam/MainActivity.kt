@@ -15,7 +15,6 @@ import com.example.pgr208_exam.gsontypes.collection.Feature
 import com.example.pgr208_exam.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickListener, SearchView.OnQueryTextListener {
 
     var url = "https://www.noforeignland.com/home/api/v1/places/"
