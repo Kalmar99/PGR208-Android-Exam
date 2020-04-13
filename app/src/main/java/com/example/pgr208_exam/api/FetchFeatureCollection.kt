@@ -18,7 +18,7 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val cacheListener
         val featureCollectionDao = FeatureCollectionDao(context,db,cacheListener)
 
         val features = getDataFromDb(featureCollectionDao,"SELECT * FROM ${FEATURE_COLLECTION_TABLE}")
-
+        println(features)
         if(features != null) {
             //if it can find data in database, use that
             Log.i("DATA: ", "from db")

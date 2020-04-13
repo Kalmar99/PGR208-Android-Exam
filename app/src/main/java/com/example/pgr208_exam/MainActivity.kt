@@ -126,8 +126,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         if (isFinishing ) {
             return;
         }
-        progressBar.visibility = View.GONE;
-        //progressBar.visibility = if (show) View.VISIBLE else View.GONE
+
     }
 
     override fun onRefresh() {
@@ -145,20 +144,20 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
     override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
         //Progresstuff
         println("Downloading data")
+        cacheProgressBar.setProgress(0)
         CacheData<Feature>(dao,features,this).execute(null)
     }
 
     override fun onBackgroundDownloadComplete() {
-       //Update data
         println("Done downloading")
+        cacheProgressBar.visibility = View.GONE;
     }
 
     override fun updateBackground(progress: Int) {
-        //Porgress
+        cacheProgressBar.setProgress(progress);
     }
-
     override fun onUpdateBackground(show: Boolean) {
-        //Progress
+        cacheProgressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun onDestroy() {
