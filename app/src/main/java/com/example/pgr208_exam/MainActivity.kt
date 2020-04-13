@@ -59,17 +59,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
         var id = v?.tag as Long
 
-
-
-            println("Location pressed")
-            /*
-            var intent = Intent(context,MapsActivity::class.java)
-            intent.putExtra("lat",featureItm.geometry.coordinates[0])
-            intent.putExtra("lon",featureItm.geometry.coordinates[1])
-            intent.putExtra("name",featureItm.properties.name)
-            context.startActivity(intent); */
-
-
         var intent = Intent(this,FeatureActivity::class.java)
         intent.putExtra(FeatureActivity.FEATURE_ID,id)
         startActivity(intent)

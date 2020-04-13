@@ -11,6 +11,7 @@ import com.google.gson.Gson
 
 class FetchFeature(listener: AsyncListener<Feature>?,val cacheListener: AsyncCacheListener<Feature>?,val context: Context,val db: SQLiteDatabase,val id: Long) : AbstractFetch<Feature>(listener) {
 
+
     override fun doInBackground(vararg params: String?): ArrayList<Feature> {
         publishProgress(0)
 
