@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
             intent.putExtra("name",name)
             startActivity(intent)
 
+
         } else {
             //Clicked title
             var id = v?.tag as Long
