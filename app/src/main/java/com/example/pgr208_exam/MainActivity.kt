@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         recyclerView.adapter = adapter;
         refreshLayout.setOnRefreshListener(this)
         adapter.onClickListener = this
-        adapter.context = this;
 
         db = Database(this).writableDatabase;
 

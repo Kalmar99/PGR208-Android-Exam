@@ -1,14 +1,11 @@
 package com.example.pgr208_exam.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pgr208_exam.MapsActivity
 import com.example.pgr208_exam.R
 import com.example.pgr208_exam.gsontypes.collection.Feature
 import kotlinx.android.synthetic.main.feature_item_layout.view.*
@@ -16,7 +13,6 @@ import kotlinx.android.synthetic.main.feature_item_layout.view.*
 class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickListener: View.OnClickListener? = null)  : RecyclerView.Adapter<FeatureAdapter.FeatureViewHolder>(), Filterable {
 
     var fullList: ArrayList<Feature> = ArrayList()
-    lateinit var context: Context;
 
     inner class SearchFilter(val adapter: FeatureAdapter) : Filter() {
 
@@ -93,15 +89,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
             itemView.locationIcon.setTag(R.id.lat,featureItm.geometry.coordinates[1])
             itemView.locationIcon.setTag(R.id.lon,featureItm.geometry.coordinates[0])
             itemView.locationIcon.setTag(R.id.name,featureItm.properties.name)
-            //This can use same onclick as the other
-            /*
-            itemView.locationIcon.setOnClickListener(View.OnClickListener {
-                var intent = Intent(context,MapsActivity::class.java)
-                intent.putExtra("lat",featureItm.geometry.coordinates[1])
-                intent.putExtra("lon",featureItm.geometry.coordinates[0])
-                intent.putExtra("name",featureItm.properties.name)
-                context.startActivity(intent);
-            }) */
+
         }
     }
 
