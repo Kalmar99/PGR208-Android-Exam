@@ -1,5 +1,6 @@
 package com.example.pgr208_exam.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +67,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
         var view = LayoutInflater.from(parent.context)
             .inflate(R.layout.feature_item_layout, parent, false) //Inflating a ViewHolder
 
-        return FeatureViewHolder(view)
+        return FeatureViewHolder(view,parent.context)
     }
 
     override fun getItemCount(): Int {
@@ -77,9 +78,13 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
         holder.bindFeatureWithViewHolder(list.get(position))
     }
 
-    inner class FeatureViewHolder( var view: View) : RecyclerView.ViewHolder(view) {
+    inner class FeatureViewHolder( var view: View,val context: Context) : RecyclerView.ViewHolder(view) {
 
         fun bindFeatureWithViewHolder(featureItm: Feature) {
+
+            val icon = context.resources.getIdentifier(featureItm.properties.icon.toLowerCase(),"drawable",context.packageName);
+            println(icon.toString() + " | "  + featureItm.properties.icon)
+            itemView.featureIcon.setImageResource(icon)
 
             itemView.textViewName.text = featureItm.properties.getName();
             itemView.tag = featureItm.properties.getId();
@@ -89,6 +94,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
             itemView.locationIcon.setTag(R.id.lat,featureItm.geometry.coordinates[1])
             itemView.locationIcon.setTag(R.id.lon,featureItm.geometry.coordinates[0])
             itemView.locationIcon.setTag(R.id.name,featureItm.properties.name)
+
 
         }
     }
