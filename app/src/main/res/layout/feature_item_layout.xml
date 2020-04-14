@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="12dp"
-    android:layout_margin="5dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardElevation="4dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/featureIcon"
-            />
+    <ImageView
+        android:paddingLeft="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/featureIcon"
+        />
 
     <TextView
         android:layout_marginLeft="16dp"
@@ -30,15 +21,14 @@
         android:textFontWeight="600"
         android:textSize="20sp"
         android:id="@+id/textViewName"
-        android:layout_width="330dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black" />
     <ImageView
         android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:id="@+id/locationIcon"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:src="@drawable/location_icon"/>
 
     </RelativeLayout>
-</androidx.cardview.widget.CardView>
