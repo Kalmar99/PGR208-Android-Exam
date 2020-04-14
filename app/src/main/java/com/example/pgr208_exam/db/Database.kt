@@ -21,7 +21,8 @@ open class Database(context: Context) : SQLiteOpenHelper(context,DB_NAME,null, D
             id INTEGER PRIMARY KEY UNIQUE NOT NULL,
             name TEXT,
             lat REAL,
-            lon REAL);
+            lon REAL,
+            icon TEXT);
             """
         db?.execSQL(sql)
 

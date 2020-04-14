@@ -27,13 +27,14 @@ class FeatureCollectionDao(context: Context,database: SQLiteDatabase,var listene
             database.disableWriteAheadLogging()
             database.beginTransaction()
 
-            var statement = database!!.compileStatement("INSERT INTO ${FEATURE_COLLECTION_TABLE} (id,name,lat,lon) VALUES(?,?,?,?)")
+            var statement = database!!.compileStatement("INSERT INTO ${FEATURE_COLLECTION_TABLE} (id,name,lat,lon,icon) VALUES(?,?,?,?,?)")
 
             for(feature in features) {
 
                 val id = feature.getProperties().getId()
                 var name = feature.getProperties().getName()
                 val cords = feature.getGeometry().getCoordinates()
+                val icon = feature.properties.icon
                 val lat = cords[0]
                 val lon = cords[1]
 
@@ -41,6 +42,7 @@ class FeatureCollectionDao(context: Context,database: SQLiteDatabase,var listene
                 statement.bindString(2,name);
                 statement.bindDouble(3,lat)
                 statement.bindDouble(4,lon);
+                statement.bindString(5,icon)
                 statement.executeInsert();
 
                 progress += 1;
@@ -71,6 +73,7 @@ class FeatureCollectionDao(context: Context,database: SQLiteDatabase,var listene
         val name = cursor.getString(cursor.getColumnIndex("name"))
         val lat = cursor.getDouble(cursor.getColumnIndex("lat"))
         val lon = cursor.getDouble(cursor.getColumnIndex("lon"))
+        val icon = cursor.getString(cursor.getColumnIndex("icon"))
 
         //Create feature
         val feature = Feature()
@@ -79,6 +82,7 @@ class FeatureCollectionDao(context: Context,database: SQLiteDatabase,var listene
         val properties = Properties()
         properties.setId(id)
         properties.setName(name)
+        properties.setIcon(icon)
 
         //Create Geometry object
         val geometry = Geometry()
