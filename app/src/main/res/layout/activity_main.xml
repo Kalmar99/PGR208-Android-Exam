@@ -9,7 +9,6 @@
     tools:context=".MainActivity">
 
     <androidx.core.widget.ContentLoadingProgressBar
-        android:visibility="gone"
         android:id="@+id/cacheProgressBar"
         android:layout_width="match_parent"
         android:progressDrawable="@drawable/cache_progress_bar"
