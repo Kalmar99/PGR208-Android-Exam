@@ -83,7 +83,6 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
         fun bindFeatureWithViewHolder(featureItm: Feature) {
 
             val icon = context.resources.getIdentifier(featureItm.properties.icon.toLowerCase(),"drawable",context.packageName);
-            println(icon.toString() + " | "  + featureItm.properties.icon)
             itemView.featureIcon.setImageResource(icon)
 
             itemView.textViewName.text = featureItm.properties.getName();
