@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
         db = Database(this).writableDatabase;
 
-        //searchBar.setOnQueryTextListener(this)
-
         if(Utils.isNetworkAvailable(this)) {
             FetchFeatureList(this,null,this,db).execute(url);
         } else {
@@ -121,18 +119,10 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         Toast.makeText(this, getString(R.string.feature_error), Toast.LENGTH_LONG).show()
     }
 
-    override fun showProgress(show: Boolean) {
-
-        if (isFinishing ) {
-            return;
-        }
-
-    }
+    override fun showProgress(show: Boolean) {}
 
     override fun onRefresh() {
         if(Utils.isNetworkAvailable(this)) {
-            //val db = Database(this).writableDatabase;
-            //Wipe the database
             db.execSQL("""DELETE FROM ${FEATURE_COLLECTION_TABLE}""")
             FetchFeatureCollection(this,this,this,db).execute(url)
         } else {
@@ -142,14 +132,11 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
     }
 
     override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
-        //Progresstuff
-        println("Downloading data")
         cacheProgressBar.setProgress(0)
         CacheData<Feature>(dao,features,this).execute(null)
     }
 
     override fun onBackgroundDownloadComplete() {
-        println("Done downloading")
         cacheProgressBar.visibility = View.GONE;
     }
 
@@ -162,7 +149,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
     override fun onDestroy() {
         super.onDestroy()
-        //Closing the db connection
         db.close()
     }
 
