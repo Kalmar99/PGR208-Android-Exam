@@ -144,20 +144,24 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
     override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
         //Progresstuff
         println("Downloading data")
-        cacheProgressBar.setProgress(0)
         CacheData<Feature>(dao,features,this).execute(null)
     }
 
     override fun onBackgroundDownloadComplete() {
         println("Done downloading")
-        cacheProgressBar.visibility = View.GONE;
+        cacheProgressBar.hide();
     }
 
     override fun updateBackground(progress: Int) {
         cacheProgressBar.setProgress(progress);
     }
     override fun onUpdateBackground(show: Boolean) {
-        cacheProgressBar.visibility = if (show) View.VISIBLE else View.GONE
+        if(show) {
+            cacheProgressBar.show()
+        } else {
+            cacheProgressBar.hide();
+        }
+        //cacheProgressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun onDestroy() {
