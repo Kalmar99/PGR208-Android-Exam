@@ -56,21 +56,21 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheL
         val protectedFromValue = collection[0].place.protectionFrom
 
         if(dieselpriceValue.equals(0.0)) {
-            dieselprice.visibility = View.GONE;
+            dieselprice.text = getString(R.string.diesel,getString(R.string.unknown))
         } else {
-            dieselprice.text = "Diesel price: " + collection[0].place.dieselPrice
+            dieselprice.text = getString(R.string.diesel,dieselpriceValue.toString())
         }
 
         if(gasolinepriceValue.compareTo(0).equals(0)) {
-            gasolineprice.visibility = View.GONE
+            gasolineprice.text = getString(R.string.gasoline,getString(R.string.unknown))
         } else {
-            gasolineprice.text = "Gasoline Price: " + collection[0].place.gasolinePrice
+            gasolineprice.text = getString(R.string.gasoline,gasolinepriceValue.toString())
         }
 
         if(protectedFromValue.isEmpty()) {
-            protectedFrom.visibility = View.GONE
+            protectedFrom.text = getString(R.string.protectedFrom,getString(R.string.unknown))
         } else {
-            protectedFrom.text = "Protected from: " + collection[0].place.protectionFrom
+            protectedFrom.text = getString(R.string.protectedFrom,protectedFromValue)
         }
 
         var path = collection[0].place?.getBanner()

@@ -5,6 +5,11 @@
     <string name="search">Search</string>
     <string name="queryHint">Search by name</string>
     <string name="CachingDataWarning">Caching Data - please dont close the app</string>
+    <string name="unknown">Unknown</string>
+    <string name="diesel">Diesel Price: %1$s</string>
+    <string name="gasoline">Gasoline Price: %1$s</string>
+    <string name="protectedFrom">Protected From: %s</string>
+    <string name="generalInfo">General Info</string>
 
     <!-- Vars to store lat,lon,name from icon click in FeatureAdapter -->
     <item type="id" name="lat"></item>

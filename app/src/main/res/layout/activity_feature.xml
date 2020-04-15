@@ -23,6 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:id="@+id/banner"
+            android:layout_margin="8dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true" />
 
@@ -36,6 +37,7 @@
             android:textSize="25sp"
             android:textColor="@color/black"
             android:layout_below="@+id/banner"/>
+
 
         <ImageView
             android:layout_alignParentRight="true"
@@ -59,25 +61,64 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/comments"
             android:layout_margin="8dp"
+            android:textSize="18dp"
+            android:id="@+id/generalInfo"
+            android:text="@string/generalInfo" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:id="@+id/fuelIcon"
+            android:layout_margin="8dp"
+            android:layout_below="@+id/generalInfo"
+            android:src="@drawable/fuel" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="4dp"
             android:textSize="16sp"
             android:id="@+id/dieselprice"
-            android:layout_below="@+id/comments" />
+            android:layout_toRightOf="@+id/fuelIcon"
+            android:layout_below="@+id/generalInfo" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:id="@+id/fuelIcon2"
+            android:layout_margin="8dp"
+            android:layout_below="@+id/dieselprice"
+            android:src="@drawable/fuel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="4dp"
             android:textSize="16sp"
             android:id="@+id/gasolineprice"
+            android:layout_toRightOf="@+id/fuelIcon2"
             android:layout_below="@+id/dieselprice" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:id="@+id/compassIcon"
+            android:layout_below="@+id/gasolineprice"
+            android:src="@drawable/compass" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="4dp"
             android:textSize="16sp"
+
             android:id="@+id/protectedFrom"
+            android:layout_toRightOf="@+id/compassIcon"
             android:layout_below="@+id/gasolineprice" />
 
 
