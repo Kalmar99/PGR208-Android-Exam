@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
         val search = menu?.findItem(R.id.searchBar)?.actionView as SearchView
+        search.queryHint = getString(R.string.queryHint)
         search.setOnQueryTextListener(this)
         return super.onCreateOptionsMenu(menu)
     }

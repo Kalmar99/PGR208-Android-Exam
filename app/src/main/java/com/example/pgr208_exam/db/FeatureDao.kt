@@ -15,13 +15,20 @@ class FeatureDao(context: Context, database: SQLiteDatabase) : AbstractDao<Featu
     override fun insert(features: List<Feature>) {
 
             for(feature in features) {
-                var statement = database!!.compileStatement("INSERT INTO '${FEATURE_SINGLE_TABLE}' (id,banner,comments) VALUES(?,?,?)")
-                val id = feature.place.getId();
-                val banner = feature.place.getBanner();
-                val comments = feature.place.getComments();
+                var statement = database!!.compileStatement("INSERT INTO '${FEATURE_SINGLE_TABLE}' (id,banner,comments,dieselprice,gasolineprice,protected) VALUES(?,?,?,?,?,?)")
+                val id = feature.place.id;
+                val banner = feature.place.banner;
+                val comments = feature.place.comments;
+                val dieselprice = feature.place.dieselPrice
+                val gasolineprice = feature.place.gasolinePrice
+                val protected = feature.place.protectionFrom
+
                 statement.bindLong(1,id);
                 statement.bindString(2,banner)
                 statement.bindString(3,comments)
+                statement.bindDouble(4,dieselprice)
+                statement.bindLong(5,gasolineprice)
+                statement.bindString(6,protected)
                 statement.executeInsert()
             }
 
@@ -35,15 +42,22 @@ class FeatureDao(context: Context, database: SQLiteDatabase) : AbstractDao<Featu
         val lon = cursor.getDouble(cursor.getColumnIndex("lon"))
         val banner = cursor.getString(cursor.getColumnIndex("banner"))
         val comments = cursor.getString(cursor.getColumnIndex("comments"))
+        val dieselprice = cursor.getDouble(cursor.getColumnIndex("dieselprice"))
+        val gasolineprice = cursor.getLong(cursor.getColumnIndex("gasolineprice"))
+        val protected = cursor.getString(cursor.getColumnIndex("protected"))
 
         var feature = Feature()
         var place = Place()
-        place.setId(id);
-        place.setName(name)
-        place.setLat(lat)
-        place.setLon(lon)
-        place.setBanner(banner)
-        place.setComments(comments)
+        place.id = id;
+        place.name = name
+        place.lat = lat
+        place.lon = lon
+        place.banner = banner
+        place.comments = comments
+        place.dieselPrice = dieselprice
+        place.gasolinePrice = gasolineprice
+        place.protectionFrom = protected
+
 
         feature.setPlace(place)
         return feature;

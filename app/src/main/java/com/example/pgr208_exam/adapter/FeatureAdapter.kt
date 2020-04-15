@@ -15,7 +15,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
 
     var fullList: ArrayList<Feature> = ArrayList()
 
-    inner class SearchFilter(val adapter: FeatureAdapter) : Filter() {
+    inner class SearchFilter( private val adapter: FeatureAdapter) : Filter() {
 
         var filteredList = ArrayList<Feature>()
 

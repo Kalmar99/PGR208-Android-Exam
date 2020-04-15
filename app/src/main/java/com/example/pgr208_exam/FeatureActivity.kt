@@ -51,12 +51,34 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheL
 
     override fun onFeaturesSuccess(collection: ArrayList<Feature>) {
         titleText.text = collection[0].place.name
+        val dieselpriceValue = collection[0].place.dieselPrice;
+        val gasolinepriceValue = collection[0].place.gasolinePrice
+        val protectedFromValue = collection[0].place.protectionFrom
 
-            var path = collection[0].place?.getBanner()
-            if(path != null) {
-                if(path.isEmpty()) {path = "http//"}
-            }
+        if(dieselpriceValue.equals(0.0)) {
+            dieselprice.visibility = View.GONE;
+        } else {
+            dieselprice.text = "Diesel price: " + collection[0].place.dieselPrice
+        }
 
+        if(gasolinepriceValue.compareTo(0).equals(0)) {
+            gasolineprice.visibility = View.GONE
+        } else {
+            gasolineprice.text = "Gasoline Price: " + collection[0].place.gasolinePrice
+        }
+
+        if(protectedFromValue.isEmpty()) {
+            protectedFrom.visibility = View.GONE
+        } else {
+            protectedFrom.text = "Protected from: " + collection[0].place.protectionFrom
+        }
+
+        var path = collection[0].place?.getBanner()
+        if(path != null) {
+            if(path.isEmpty()) {path = "http//"}
+        }
+
+        println(collection[0].toString() )
             Picasso.get()
                 .load(path)
                 .placeholder(R.drawable.notfound)

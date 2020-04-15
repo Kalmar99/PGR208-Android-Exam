@@ -30,7 +30,10 @@ open class Database(context: Context) : SQLiteOpenHelper(context,DB_NAME,null, D
             CREATE TABLE ${FEATURE_SINGLE_TABLE}(
             id INTEGER PRIMARY KEY UNIQUE NOT NULL,
             banner TEXT,
-            comments TEXT);
+            comments TEXT,
+            dieselprice REAL,
+            gasolineprice INTEGER,
+            protected TEXT);
             """
 
         //Table 2
