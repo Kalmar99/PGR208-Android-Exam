@@ -12,6 +12,8 @@ import java.lang.Exception
 
 class FetchFeatureCollection(listener: AsyncListener<Feature>?,val cacheListener: AsyncCacheListener<Feature>,val context: Context,val db: SQLiteDatabase) : AbstractFetch<Feature>(listener) {
 
+
+
     override fun doInBackground(vararg params: String?): ArrayList<Feature> {
         publishProgress(0)
 
@@ -45,6 +47,10 @@ class FetchFeatureCollection(listener: AsyncListener<Feature>?,val cacheListener
         var features = ArrayList<Feature>(collection.getFeatures())
 
         return features
+    }
+
+    fun cleanDb() {
+        db.execSQL("""DELETE FROM $FEATURE_COLLECTION_TABLE""")
     }
 
 

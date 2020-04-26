@@ -122,5 +122,33 @@
             android:layout_below="@+id/gasolineprice" />
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/compassIcon"
+            android:layout_margin="8dp"
+            android:textSize="18dp"
+            android:id="@+id/facilitiesInfo"
+            android:text="Facilities" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="4dp"
+            android:textSize="16sp"
+            android:id="@+id/facilities"
+            android:layout_toRightOf="@id/facilitiesInfo"
+            android:layout_below="@+id/compassIcon" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/facilitiesInfo"
+            android:id="@+id/facilitiesIcons"
+            android:orientation="horizontal" />
+
+
+
+
     </RelativeLayout>
 </ScrollView>

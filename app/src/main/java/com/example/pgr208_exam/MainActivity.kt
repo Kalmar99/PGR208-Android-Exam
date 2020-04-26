@@ -76,7 +76,8 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
             val lat = v.getTag(R.id.lat) as Double
             val lon = v.getTag(R.id.lon) as Double
             val name = v.getTag(R.id.name) as String
-            //println("Name: $name Lat: $lat Lon: $lon")
+
+            println("Location: LAT: " + lat + "LON: " + lon)
 
             val intent = Intent(this,MapsActivity::class.java)
             intent.putExtra("lat",lat)
@@ -100,6 +101,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         if(isFinishing) {
             return;
         }
+        adapter.fullList.clear()
         adapter.fullList.addAll(features)
         adapter.list = features // update list
         adapter.notifyDataSetChanged() // Notify the adapter that data has been updated
@@ -124,8 +126,9 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
     override fun onRefresh() {
         if(Utils.isNetworkAvailable(this)) {
-            db.execSQL("""DELETE FROM ${FEATURE_COLLECTION_TABLE}""")
-            FetchFeatureCollection(this,this,this,db).execute(url)
+            val loader = FetchFeatureCollection(this,this,this,db)
+            loader.cleanDb()
+            loader.execute(url)
         } else {
             Toast.makeText(this, getString(R.string.connectivity_error), Toast.LENGTH_LONG).show()
 
@@ -134,13 +137,10 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
 
     override fun onDownloadInBackground(dao: AbstractDao<Feature>, features: ArrayList<Feature>) {
         cacheProgressBar.setProgress(0)
-        //Progresstuff
-        println("Downloading data")
         CacheData<Feature>(dao,features,this).execute(null)
     }
 
     override fun onBackgroundDownloadComplete() {
-        println("Done downloading")
         cacheProgressBar.hide();
     }
 
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
         } else {
             cacheProgressBar.hide();
         }
-        //cacheProgressBar.visibility = if (show) View.VISIBLE else View.GONE
+
     }
 
     override fun onDestroy() {

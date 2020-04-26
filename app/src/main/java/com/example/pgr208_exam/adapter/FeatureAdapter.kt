@@ -15,7 +15,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
 
     var fullList: ArrayList<Feature> = ArrayList()
 
-    inner class SearchFilter( private val adapter: FeatureAdapter) : Filter() {
+    inner class SearchFilter : Filter() {
 
         var filteredList = ArrayList<Feature>()
 
@@ -51,15 +51,15 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
                     }
                 }
 
-                adapter.list = ret;
-                adapter.notifyDataSetChanged()
+                list = ret;
+                notifyDataSetChanged()
             }
 
         }
     }
 
     override fun getFilter(): Filter {
-        return SearchFilter(this)
+        return SearchFilter()
     }
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): FeatureAdapter.FeatureViewHolder {
@@ -90,10 +90,9 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
             itemView.setOnClickListener(onClickListener)
             itemView.locationIcon.tag = -1;
             itemView.locationIcon.setOnClickListener(onClickListener)
-            itemView.locationIcon.setTag(R.id.lat,featureItm.geometry.coordinates[1])
-            itemView.locationIcon.setTag(R.id.lon,featureItm.geometry.coordinates[0])
+            itemView.locationIcon.setTag(R.id.lat,featureItm.geometry.coordinates[0])
+            itemView.locationIcon.setTag(R.id.lon,featureItm.geometry.coordinates[1])
             itemView.locationIcon.setTag(R.id.name,featureItm.properties.name)
-
 
         }
     }

@@ -33,7 +33,8 @@ open class Database(context: Context) : SQLiteOpenHelper(context,DB_NAME,null, D
             comments TEXT,
             dieselprice REAL,
             gasolineprice INTEGER,
-            protected TEXT);
+            protected TEXT,
+            facilities TEXT);
             """
 
         //Table 2

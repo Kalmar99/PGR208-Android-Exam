@@ -35,8 +35,9 @@ class FeatureCollectionDao(context: Context,database: SQLiteDatabase,var listene
                 var name = feature.getProperties().getName()
                 val cords = feature.getGeometry().getCoordinates()
                 val icon = feature.properties.icon
-                val lat = cords[0]
-                val lon = cords[1]
+
+                val lat = cords[1]
+                val lon = cords[0]
 
                 statement.bindLong(1,id);
                 statement.bindString(2,name);
