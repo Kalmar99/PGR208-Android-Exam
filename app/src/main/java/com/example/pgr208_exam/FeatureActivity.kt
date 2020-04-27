@@ -169,8 +169,6 @@ class FeatureActivity : AppCompatActivity(), AsyncListener<Feature>, AsyncCacheL
         locationIcon.setOnClickListener(View.OnClickListener {
             var intent = Intent(this,MapsActivity::class.java)
 
-            println("Location: LAT: " + collection[0].place.lat + "LON: " + collection[0].place.lon)
-
             intent.putExtra("lat",collection[0].place.lat)
             intent.putExtra("lon",collection[0].place.lon)
             intent.putExtra("name",collection[0].place.name)

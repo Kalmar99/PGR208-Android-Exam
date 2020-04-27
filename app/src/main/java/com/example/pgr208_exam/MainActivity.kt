@@ -77,8 +77,6 @@ class MainActivity : AppCompatActivity(),AsyncListener<Feature>, View.OnClickLis
             val lon = v.getTag(R.id.lon) as Double
             val name = v.getTag(R.id.name) as String
 
-            println("Location: LAT: " + lat + "LON: " + lon)
-
             val intent = Intent(this,MapsActivity::class.java)
             intent.putExtra("lat",lat)
             intent.putExtra("lon",lon)

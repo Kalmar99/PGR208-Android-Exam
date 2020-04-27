@@ -78,7 +78,7 @@ class FeatureAdapter(var list: ArrayList<Feature> = ArrayList(), var onClickList
         holder.bindFeatureWithViewHolder(list.get(position))
     }
 
-    inner class FeatureViewHolder( var view: View,val context: Context) : RecyclerView.ViewHolder(view) {
+    inner class FeatureViewHolder( view: View,val context: Context) : RecyclerView.ViewHolder(view) {
 
         fun bindFeatureWithViewHolder(featureItm: Feature) {
 
